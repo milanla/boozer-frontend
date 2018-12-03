@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/semantic-ui/dist/semantic.min.css';
 import CocktailContainer from './CocktailContainer'
-import CocktailDisplay from './CocktailDisplay'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Form from './Form';
 
 class App extends Component {
   state = {
     cocktails: [],
-    selectedCocktail: {},
-    isClicked: false
+    cocktailDetail: []
   }
 
   componentDidMount = () => {
@@ -18,17 +18,13 @@ class App extends Component {
   }
 
   handleClick = (e, obj) => {
-    this.setState({
-      selectedCocktail: obj,
-      isClicked: !this.state.isClicked
-    })
-  }
-
-  handleGoBack = () => {
+    e.preventDefault()
     console.log('made it')
-    this.setState({
-      isClicked: !this.state.isClicked
-    })
+    fetch('http://localhost:3000/api/v1/cocktails/' + obj.id)
+      .then(res => res.json())
+      .then(json => this.setState({
+        cocktailDetail: json.proportions
+      }))
   }
 
   render() {
@@ -37,13 +33,19 @@ class App extends Component {
         <div className="App-header">
           <h1>Boozer</h1>
         </div>
-          {this.state.isClicked?
-            <CocktailDisplay obj={this.state.selectedCocktail}
-            goBack={this.handleGoBack}/>
-            :
-            <CocktailContainer  cocktails={this.state.cocktails}
-            showPage={this.handleClick}/>
-          }
+        <div className="mainWrapper">
+          <Router>
+            <React.Fragment>
+              <Route path='/'
+              render={(props) => <CocktailContainer {...props} cocktails={this.state.cocktails}
+              showDetail={this.handleClick}
+              cocktailDetail={this.state.cocktailDetail}
+              />}
+              />
+            <Form/>
+            </React.Fragment>
+          </Router>
+        </div>
       </div>
     );
   }

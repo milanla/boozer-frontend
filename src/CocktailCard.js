@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
-const CocktailCard = (props) => {
+const CocktailCard = ({cocktails, showDetail}) => {
+  const renderCocktails = cocktails.map(cocktail => (
+    <div className="ui card" onClick={(e) => showDetail(e, cocktail)}>
+      <NavLink key={cocktail.id} to={`/api/v1/cocktails/${cocktail.id}`}>{cocktail.name}</NavLink>
+    </div>
+  ))
 
   return (
-    <div className="ui card" onClick={(e) => props.showPage(e, props.cocktailObj)}>
-      <div className="header">
-        <h2>{props.cocktailObj.name}</h2>
-      </div>
-      <div className="image">
-        <img src="https://media.giphy.com/media/AxVvjTt0Fa1WEHzMM8/giphy.gif" alt="cocktail" />
-      </div>
+    <div className="list">
+      {renderCocktails}
     </div>
   )
 }

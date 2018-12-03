@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
 
-const CocktailDisplay = (props) => {
+const CocktailDisplay = ({match, cocktail, cocktailDetail}) => {
+
+  let arrayOfProportions = cocktailDetail.map(p => {
+    return <li>{p.ingredient_name}</li>
+  })
+
   return (
-    <div className="ui segment">
-      <img className="ui centered medium image" src="https://media.giphy.com/media/Wp6EMxmnrz0yc/giphy.gif" alt=""/>
-      <h1>{props.obj.name}</h1>
-      <div className="content">
-        <h3>Description</h3>
-        <p>{props.obj.description}</p>
-      </div>
-      <div className="content">
-        <h3>Instructions</h3>
-        <p>{props.obj.instructions}</p>
-      </div>
-      <div className="extra content">
-        <h3>Source</h3>
-        <p>{props.obj.source}</p>
-      </div>
-      <div className="extra content">
-        <div className="ui button" onClick={() => props.goBack()}>
-          main page
-        </div>
-      </div>
-    </div>
+
+    cocktail.id === parseInt(match.params.id) ? (<div className='display'>
+      <h1>{cocktail.name}</h1>
+      <p>{cocktail.description}</p>
+      <ul>{arrayOfProportions}</ul>
+    </div>) : null
   )
 }
 

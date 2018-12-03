@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import CocktailCard from './CocktailCard'
+import CocktailCard from './CocktailCard';
+import CocktailDisplay from './CocktailDisplay';
+import { Route } from 'react-router-dom';
 
+const CocktailContainer = ({match, cocktails, showDetail, cocktailDetail}) => (
+  <div>
+    <Route path={`${match.url}`} render={(props) => <CocktailCard {...props} cocktails={cocktails} showDetail={showDetail}/>} />
 
-export default class CocktailContainer extends Component {
+    {cocktails.map(cocktail => (
+      <Route path={`${match.url}/:cocktailId`} render={(props) => <CocktailDisplay {...props} cocktail={cocktail} cocktailDetail={cocktailDetail}/>} />
+    ))}
+  </div>
+)
 
-  render() {
-    let arrayOfCocktails = this.props.cocktails.map(cocktailObj => {
-      return <CocktailCard key={cocktailObj.id} cocktailObj={cocktailObj}
-      showPage={this.props.showPage}/>
-    })
-    return (
-      <div className="ui four column centered grid">
-        {arrayOfCocktails}
-      </div>
-    )
-  }
-}
+export default CocktailContainer;

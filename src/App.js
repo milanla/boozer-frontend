@@ -5,26 +5,6 @@ import CocktailContainer from './CocktailContainer'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
-  state = {
-    cocktails: [],
-    cocktailDetail: []
-  }
-
-  componentDidMount = () => {
-    fetch('http://localhost:3000/api/v1/cocktails')
-      .then(res => res.json())
-      .then(json => this.setState({ cocktails: json }))
-  }
-
-  handleClick = (e, obj) => {
-    e.preventDefault()
-    console.log('made it')
-    fetch('http://localhost:3000/api/v1/cocktails/' + obj.id)
-      .then(res => res.json())
-      .then(json => this.setState({
-        cocktailDetail: json.proportions
-      }))
-  }
 
   render() {
     return (
@@ -36,9 +16,7 @@ class App extends Component {
           <Router>
             <React.Fragment>
               <Route path='/api/v1/cocktails'
-              render={(props) => <CocktailContainer {...props} cocktails={this.state.cocktails}
-              showDetail={this.handleClick}
-              cocktailDetail={this.state.cocktailDetail}
+              render={(props) => <CocktailContainer {...props}
               />}
               />
             </React.Fragment>

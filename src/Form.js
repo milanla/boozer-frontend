@@ -19,7 +19,7 @@ export default class Form extends Component {
 
   submitHandler = (e, obj) => {
     e.preventDefault()
-    console.log(obj)
+    this.props.addNewCocktail(e, obj)
   }
 
   handleClick = (e) => {
@@ -33,7 +33,7 @@ export default class Form extends Component {
       if (idx !== objIdx) {
         return obj
       }
-      return {...obj, [e.target.name]: e.target.value}
+      return {...obj,[e.target.name]: e.target.value}
     })
     this.setState({ proportions: newIng })
   }

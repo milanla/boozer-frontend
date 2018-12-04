@@ -20,8 +20,17 @@
 }
 
 #list {
-  max-height: 600px;
+  height: 600px;
   overflow: scroll;
+}
+
+#display {
+  height: 600px;
+}
+
+#form {
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .mainWrapper {
@@ -29,6 +38,10 @@
   margin: auto;
 }
 
-.column {
-  max-width: (1/3);
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }

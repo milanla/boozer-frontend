@@ -33,7 +33,7 @@ export default class Form extends Component {
       if (idx !== objIdx) {
         return obj
       }
-      return {...this.state.proportions, [e.target.name]: e.target.value}
+      return {...obj, [e.target.name]: e.target.value}
     })
     this.setState({ proportions: newIng })
   }

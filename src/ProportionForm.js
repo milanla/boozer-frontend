@@ -22,3 +22,10 @@ const ProportionForm = (props) => {
 }
 
 export default ProportionForm
+
+
+// create another form
+// pass down props
+// - this.state.proportions
+// - this.handleChange
+// - this.handleSubmit

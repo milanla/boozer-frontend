@@ -36,26 +36,40 @@ class CocktailContainer extends Component {
       body: JSON.stringify({
         name: obj.name,
         description: obj.description,
-        instructions: obj.instructions
+        instructions: obj.instructions,
+        source: obj.source
       })
     })
       .then(res => res.json())
-      .then(json => this.addNewProportion(json, obj))
+      .then(json => this.addNewIngredient(json, obj))
     // need create action in cocktail controller
   }
 
-  addNewProportion = (newCocktail, obj) => {
-
-    console.log(newCocktail)
-    // console.log(obj.proportions)
-    console.log('in proportions')
-    fetch('http://localhost:3000/api/v1/cocktails/' + newCocktail.id, {
-      method: 'PATCH',
-      headers: {'Content-Type': 'application/json'},
+  addNewIngredient = (newCocktail, obj) => {
+    console.log(obj.proportions)
+    fetch('http://localhost:3000/api/v1/ingredients', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        proportions: obj.proportions
+        name: obj.proportions[0]["ingredient_name"]
       })
     })
+      .then(res => res.json())
+      .then(json => this.addNewProportion(json, newCocktail, obj))
+  }
+
+  addNewProportion = (newIngredient, newCocktail, obj) => {
+    fetch('http://localhost:3000/api/v1/proportions', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        amount: obj.proportions[0]["amount"],
+        cocktail_id: newCocktail.id,
+        ingredient_id: newIngredient.id
+      })
+    })
+      .then(res => res.json())
+      .then(console.log)
   }
 
   render() {

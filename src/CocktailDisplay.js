@@ -3,15 +3,19 @@ import React, { Component } from 'react';
 const CocktailDisplay = ({match, cocktail, cocktailDetail}) => {
 
   let arrayOfProportions = cocktailDetail.map(p => {
-    return <li>{p.ingredient_name}</li>
+    return <div>{p.ingredient_name}</div>
   })
 
   return (
-
-    cocktail.id === parseInt(match.params.id) ? (<div className='display'>
+    cocktail.id === parseInt(match.params.cocktailId) ? (<div className="column">
+      <div className="ui segment">
       <h1>{cocktail.name}</h1>
       <p>{cocktail.description}</p>
-      <ul>{arrayOfProportions}</ul>
+      <h3>Instructions</h3>
+      <p>{cocktail.instructions}</p>
+      <h3>Ingredients</h3>
+      <div>{arrayOfProportions}</div>
+      </div>
     </div>) : null
   )
 }

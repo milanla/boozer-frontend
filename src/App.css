@@ -12,32 +12,23 @@
   font-size: calc(10px + 2vmin);
   color: white;
   padding-left: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.display {
-  float: right;
-  max-width: 50%;
-}
-
-.list {
-  float: left;
+#list {
+  max-height: 600px;
+  overflow: scroll;
 }
 
 .mainWrapper {
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
+}
+
+.column {
+  max-width: (1/3);
 }

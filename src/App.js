@@ -3,7 +3,6 @@ import './App.css';
 import '../node_modules/semantic-ui/dist/semantic.min.css';
 import CocktailContainer from './CocktailContainer'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Form from './Form';
 
 class App extends Component {
   state = {
@@ -36,13 +35,12 @@ class App extends Component {
         <div className="mainWrapper">
           <Router>
             <React.Fragment>
-              <Route path='/'
+              <Route path='/api/v1/cocktails'
               render={(props) => <CocktailContainer {...props} cocktails={this.state.cocktails}
               showDetail={this.handleClick}
               cocktailDetail={this.state.cocktailDetail}
               />}
               />
-            <Form/>
             </React.Fragment>
           </Router>
         </div>

@@ -20,6 +20,15 @@ export default class Form extends Component {
   submitHandler = (e, obj) => {
     e.preventDefault()
     this.props.addNewCocktail(e, obj)
+    this.setState({
+      name: '',
+      description: '',
+      instructions:'',
+      proportions: [{
+        ingredient_name: '',
+        amount: ''
+      }]
+    })
   }
 
   handleClick = (e) => {

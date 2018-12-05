@@ -28,16 +28,15 @@ class CocktailContainer extends Component {
   }
 
   addNewCocktail = (e, obj) => {
-    // console.log('back in container')
-    // console.log(obj)
+    e.preventDefault()
+    console.log(obj)
     fetch('http://localhost:3000/api/v1/cocktails/', {
       method:'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: obj.name,
         description: obj.description,
-        instructions: obj.instructions,
-        source: obj.source
+        instructions: obj.instructions
       })
     })
       .then(res => res.json())
@@ -46,7 +45,6 @@ class CocktailContainer extends Component {
   }
 
   addNewIngredient = (newCocktail, obj) => {
-    console.log(obj.proportions)
     fetch('http://localhost:3000/api/v1/ingredients', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -69,7 +67,7 @@ class CocktailContainer extends Component {
       })
     })
       .then(res => res.json())
-      .then(console.log)
+      .then(json => this.setState({ cocktails: [...this.state.cocktails, newCocktail] }))
   }
 
   render() {
